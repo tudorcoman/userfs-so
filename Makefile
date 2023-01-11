@@ -1,9 +1,29 @@
-COMPILER = gcc
-FILESYSTEM_FILES = userfs.c
+COMPILER := gcc
+FILESYSTEM_FILES := userfs.c
+CFLAGS := `pkg-config fuse --cflags --libs`
+LIBS := `pkg-config fuse --libs`
 
-build: $(FILESYSTEM_FILES)
-	$(COMPILER) $(FILESYSTEM_FILES) -o userfs `pkg-config fuse --cflags --libs`
-	echo 'To Mount: ./userfs -f [mount point]'
+SRC := utils.c active_users.c processes.c userfs.c 
 
+OBJ := $(SRC:.c=.o)
+
+.PHONY: all
+all: userfs 
+
+%.o:%.c
+	$(COMPILER) -c $(CFLAGS) $^ -o $@ -I.
+
+
+userfs: userfs.o utils.o active_users.o processes.o
+	${COMPILER} $^ -o $@ $(LIBS)
+
+
+.PHONY: clean 
 clean:
-	rm userfs
+	rm $(OBJ)
+
+
+.PHONY: cleanall
+cleanall:
+	rm $(OBJ) userfs 
+
