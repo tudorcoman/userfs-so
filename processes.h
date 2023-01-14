@@ -7,6 +7,6 @@
 
 #include "utils.h"
 
-void get_processes(int pids[MAX_PROCESSES], char* user);
+void get_processes(int pids[MAX_PROCESSES], char* user); //intoarce pid-urile proceselor unui user
 
 #endif //PROIECT_SO_PROCESSES_H

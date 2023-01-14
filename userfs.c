@@ -134,6 +134,7 @@ static struct fuse_operations operations = {
 };
 
 int main(int argc, char *argv[]) {
-    update_users(&users);
-    return fuse_main(argc, argv, &operations, NULL);
+
+    update_users(&users); // initializare lista de useri activi
+    return fuse_main(argc, argv, &operations, NULL); // pornire FUSE cu operatiile definite mai sus
 }

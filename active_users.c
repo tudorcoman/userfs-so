@@ -11,11 +11,11 @@ ActiveUserList get_active_users() {
 
     FILE *pipe_output_comanda = open_pipe(command);
 
-    // Error handling
+    //Tratare erori
 
     ActiveUserList x;
     int i = 0;
-    // Get the data from the process execution
+
     while(fgets(data, MAX_CHARS_USERNAME, pipe_output_comanda)) {
         // in data avem fiecare user
         x.active_users[i] = (char*) malloc(strlen(data) * sizeof(char));
@@ -28,18 +28,19 @@ ActiveUserList get_active_users() {
     if (pclose(pipe_output_comanda) != 0)
         fprintf(stderr," Error: Failed to close command stream \n");
 
-    x.count = i;
+    x.count = i; // numarul de useri activi
     return x;
 }
 
 void update_users(ActiveUserList* users) {
+    // actualizeaza lista de useri activi
     ActiveUserList x = get_active_users();
     users->count = x.count;
     int i;
     for (i = 0; i < x.count; i ++)
-	users->active_users[i] = x.active_users[i];
+	    users->active_users[i] = x.active_users[i];
     for (i = x.count + 1; i < MAX_LOGGED_IN_USERS; i ++)
-	users->active_users[i] = NULL;
+	    users->active_users[i] = NULL;
 }
 
 
