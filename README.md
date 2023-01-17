@@ -18,8 +18,9 @@ git clone https://github.com/tudorcoman/userfs-so
 ## Usage
 
 ```sh
-gcc -Wall userfs.c -o userfs `pkg-config fuse3 --cflags --libs` -lpthread 
-./userfs -f -s mountpoint
+make clean all
+make
+./userfs -s mountpoint
 ```
 
 ## Run tests

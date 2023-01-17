@@ -6,6 +6,7 @@
 #include <pthread.h>
 
 ActiveUserList get_active_users() {
+    
     char* command = "who | awk '{print $1}' | sort -u";
     char data[MAX_CHARS_USERNAME]; // presupunem ca un nume de user are maxim 512 caractere
 
@@ -33,14 +34,14 @@ ActiveUserList get_active_users() {
 }
 
 void update_users(ActiveUserList* users) {
+
     // actualizeaza lista de useri activi
     ActiveUserList x = get_active_users();
     users->count = x.count;
     int i;
     for (i = 0; i < x.count; i ++)
-	    users->active_users[i] = x.active_users[i];
+        users->active_users[i] = x.active_users[i];
     for (i = x.count + 1; i < MAX_LOGGED_IN_USERS; i ++)
-	    users->active_users[i] = NULL;
+        users->active_users[i] = NULL;
+
 }
-
-

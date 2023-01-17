@@ -137,4 +137,5 @@ int main(int argc, char *argv[]) {
 
     update_users(&users); // initializare lista de useri activi
     return fuse_main(argc, argv, &operations, NULL); // pornire FUSE cu operatiile definite mai sus
+    
 }

@@ -7,6 +7,7 @@
 #include <string.h>
 
 void get_processes(int pids[MAX_PROCESSES], char* user) {
+    
     // intoarce pid-urile proceselor unui user
     char command[40 + MAX_CHARS_USERNAME]; //comanda are lungimea de 40 de caractere + lungimea numelui de user
     sprintf(command, "ps -u %s | awk '{print $1}' | tail -n +2", user); //comanda returnaza pid-urile proceselor unui user
@@ -21,4 +22,5 @@ void get_processes(int pids[MAX_PROCESSES], char* user) {
 
     if (pclose(pipe_output_comanda) != 0)
         fprintf(stderr," Error: Failed to close command stream \n");
+
 }
